@@ -13,8 +13,8 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                      <h1>Halaman Admin</h1>
 
+                    <a href="{{route('ListKunjin')}}" class="btn btn-primary">List Kunjin</a>
 
                 </div>
             </div>

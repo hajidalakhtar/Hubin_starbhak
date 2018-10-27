@@ -15,12 +15,16 @@
                                   <div class="card">
                                       <div class="card-body">
                                         <a href="{{Route('home')}}" class="btn btn-primary mb-5">Kembali</a>
-                                          <form action="{{Route('ProsesAddKunjin')}}" method='post' enctype='multipart/form-data'>
+                                        <h1></h1>
+                                          <form action="{{Route('Kunjin.ProsesAdd')}}" method='post' enctype='multipart/form-data'>
                                               @csrf
                                               <div class="form-grup">
                                                   <label>Ketua Kelompok</label>
                                                   <input type="text" name="KetuaKelompok" value="" class="form-control">
                                                   <label>Angota</label>
+                                                  @foreach ($user as $data )
+                                                    <input type="hidden" name="id_user" value="{{$data['id']}}">
+                                                  @endforeach
 
                                                   <input type="text" name="anggota_1" value="" class="form-control" placeholder="Nama Anggota 1">
                                                   <input type="text" name="anggota_2" value="" class="form-control" placeholder="Nama Anggota 2">

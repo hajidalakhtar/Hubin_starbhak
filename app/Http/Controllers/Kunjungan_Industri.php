@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\ListKunjin;
+use App\User;
 use Illuminate\Http\Request;
 
 class Kunjungan_Industri extends Controller
@@ -9,7 +10,8 @@ class Kunjungan_Industri extends Controller
   public function ShowFormKunjin()
   {
       // return view('admin.AdminLogin');
-      return view('kunjunganIndustri.Form_Kunjin');
+      $User = User::all();
+      return view('kunjunganIndustri.Form_Kunjin',['user' => $User]);
 
   }
   public function getdata()
@@ -20,7 +22,7 @@ class Kunjungan_Industri extends Controller
 public function read()
 {
   $listkunjin = ListKunjin::all();
-  return view('listkunjin',['places' => $listkunjin]);
+  return view('admin.ListKunjin',['ListKunjin' => $listkunjin]);
 }
 public function add()
 {
@@ -44,7 +46,6 @@ $listkunjin->anggota_10 = $request->anggota_10;
 $listkunjin->anggota_11 = $request->anggota_11;
 $listkunjin->anggota_12 = $request->anggota_12;
 $listkunjin->anggota_13 = $request->anggota_13;
-
 $listkunjin->perusahaan = $request->perusahaan;
 $listkunjin->alamat_perusahaan = $request->alamat_perusahaan;
 $listkunjin->tanggal_keberangkatan = $request->tanggal_keberangkatan;
@@ -53,21 +54,30 @@ $listkunjin->tanggal_keberangkatan = $request->tanggal_keberangkatan;
 $listkunjin->ssemail = "tes.png";
 $listkunjin->pembimbing = $request->pembimbing;
 $listkunjin->save();
-return redirect('/home');
-
-
+return redirect()->route('Kunjin.AddStatusUser',$request->id_user);
+}
+public function AddStatusUser($id)
+{
+  $user = User::find($id);
+  // dd($user);
+  $user->status = "Sudah Mengisi Form";
+  $user->save();
+  return redirect('/home');
 }
 public function delete($id)
 {
-  $listkunjin = place::find($id);
+
+  $listkunjin = ListKunjin::find($id);
+  // dd($listkunjin);
   $listkunjin->delete();
-  return redirect('/place');
+  return redirect('/admin/list-kunjin');
 
 }
 public function edit($id)
 {
-$listkunjin = place::find($id);
-return view('editplace',['places' => $listkunjin]);
+$listkunjin = ListKunjin::find($id);
+dd($listkunjin);
+return view('kunjunganIndustri.Form_Edit_Kunjin',['ListKunjin' => $listkunjin]);
 }
 public function update(Request $request)
 {
@@ -80,6 +90,16 @@ public function update(Request $request)
   $listkunjin->description = $request->description;
   $listkunjin->save();
   return redirect('/place');
+}
+// public function DetailData($id)
+// {
+//   $listkunjin = ListKunjin::find($id);
+// }
+public function DetailData($id)
+{
+  $listkunjin = ListKunjin::find($id);
+  // dd($listkunjin);
+  return view('admin.ListKunjin',['ListKunjin' => $listkunjin]);
 }
 
 

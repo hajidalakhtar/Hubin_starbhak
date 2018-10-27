@@ -13,8 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    {{--  --}}
+                <h1>Hello {{Auth::user()->name}}</h1>
+                @if (Auth::user()->status == "Sudah Mengisi Form")
+                  <h1>Setatus anda adalah {{Auth::user()->status}}</h1>
+                @else
+              <a href="{{route('form_kunjin')}}" class="btn btn-primary">Daftar Kunjin</a>
+            @endif
 
-                     <a href="{{route('form_kunjin')}}" class="btn btn-primary">Daftar Kunjin</a>
+
                 </div>
             </div>
         </div>

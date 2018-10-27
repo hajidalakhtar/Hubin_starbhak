@@ -22,10 +22,16 @@ Auth::routes();
 
 // Admin
 Route::get('/admin/login' ,'AdminLoginController@ShowAdminLogin');
+Route::get('/admin/list-kunjin' ,'Kunjungan_Industri@read')->middleware('auth:admin')->name('ListKunjin');
+
 Route::get('/admin/home' ,'AdminLoginController@adminhome')->middleware('auth:admin');
 Route::post('/admin/login/submit', 'AdminLoginController@adminlogin')->name('admin.login');
 Route::get('/admin/logout', 'AdminLoginController@logout')->name('admin.logout');
 
 // Kunjungan_Industri
+Route::get('/kunjin/detaildata/{id}','Kunjungan_Industri@DetailData')->name('Kunjin.DetailData');
+Route::get('/kunjin/edit/{id}','Kunjungan_Industri@edit')->name('Kunjin.edit');
+Route::get('/kunjin/delete/{id}','Kunjungan_Industri@Delete')->name('Kunjin.Delete');
+Route::get('/kunjin/AddStatusUser/{id}','Kunjungan_Industri@AddStatusUser')->name('Kunjin.AddStatusUser');
 Route::get('/form_kunjin','Kunjungan_Industri@ShowFormKunjin')->name('form_kunjin');
-Route::post('/prosesaddkunjin','Kunjungan_Industri@prosesadd')->name('ProsesAddKunjin');
+Route::post('/prosesaddkunjin','Kunjungan_Industri@prosesadd')->name('Kunjin.ProsesAdd');
