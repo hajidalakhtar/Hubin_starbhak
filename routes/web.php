@@ -27,4 +27,5 @@ Route::post('/admin/login/submit', 'AdminLoginController@adminlogin')->name('adm
 Route::get('/admin/logout', 'AdminLoginController@logout')->name('admin.logout');
 
 // Kunjungan_Industri
-Route::get('/form_kunjin','Kunjungan_Industri@ShowFormKunjin');
+Route::get('/form_kunjin','Kunjungan_Industri@ShowFormKunjin')->name('form_kunjin');
+Route::post('/prosesaddkunjin','Kunjungan_Industri@prosesadd')->name('ProsesAddKunjin');

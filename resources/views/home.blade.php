@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                     <a href="#" class="btn btn-primary">Daftar Kunjin</a>
+                     <a href="{{route('form_kunjin')}}" class="btn btn-primary">Daftar Kunjin</a>
                 </div>
             </div>
         </div>
