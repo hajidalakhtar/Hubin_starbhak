@@ -76,7 +76,7 @@ public function delete($id)
 public function edit($id)
 {
 $listkunjin = ListKunjin::find($id);
-dd($listkunjin);
+// dd($listkunjin);
 return view('kunjunganIndustri.Form_Edit_Kunjin',['ListKunjin' => $listkunjin]);
 }
 public function update(Request $request)
@@ -97,9 +97,9 @@ public function update(Request $request)
 // }
 public function DetailData($id)
 {
-  $listkunjin = ListKunjin::find($id);
+  $listkunjin = listkunjin::findOrFail($id);
   // dd($listkunjin);
-  return view('admin.ListKunjin',['ListKunjin' => $listkunjin]);
+  return view('kunjunganIndustri.Detail_Data_Kunjin',['ListKunjin' => $listkunjin]);
 }
 
 
