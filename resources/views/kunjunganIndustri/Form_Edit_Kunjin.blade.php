@@ -17,7 +17,7 @@
                                         {{-- <a href="{{Route('home')}}" class="btn btn-primary mb-5">Kembali</a> --}}
                                         <h1></h1>
 
-                                          <form action="{{Route('Kunjin.ProsesAdd')}}" method='post' enctype='multipart/form-data'>
+                                          <form action="{{Route('Kunjin.Update')}}" method='post' enctype='multipart/form-data'>
                                               @csrf
                                               <div class="form-grup">
                                                   <label>Ketua Kelompok</label>
@@ -43,21 +43,26 @@
 
                                               <div class="form-grup">
                                                   <label>Nama Perusahaan</label>
-                                                  <input type="text" name="perusahaan" value="{{$ListKunjin->perusahaan}}" class="form-control" placeholder="Nama Perusahaan">
+                                                  <select name="perusahaan" class="form-control" >
+                                                    @foreach ($perusahaan as $data )
+                                                    <option  value="{{$data->id}}">{{$data->name}}</option>
+                                                    @endforeach
+                                                  </select>
+                                                  {{-- <input type="text" name="perusahaan" value="{{$ListKunjin->namaPerusahaan()}}" class="form-control" placeholder="Nama Perusahaan"> --}}
                                               </div>
-                                              <div class="form-grup">
+                                              {{-- <div class="form-grup">
                                                   <label>Alamat Perusahaan</label>
                                                   <input type="text" name="alamat_perusahaan" value="{{$ListKunjin->alamat_perusahaan}}" class="form-control" placeholder="Alamat Perusahaan ">
-                                              </div>
+                                              </div> --}}
                                               <div class="form-grup">
                                                   <label>Tanggal Keberangkatan</label>
                                                   <input type="date" name="tanggal_keberangkatan" value="{{$ListKunjin->tanggal_keberangkatan}}" class="form-control">
                                               </div>
 
-                                              {{-- <div class="form-grup"> --}}
-                                                  {{-- <label>Screenshot Email Persetujuan Perusahaan</label> --}}
-                                                  {{-- <input type="file" name="ssemail" value="" class="form-control"> --}}
-                                              {{-- </div> --}}
+                                             {{-- <div class="form-grup">
+                                                 <label>Screenshot Email Persetujuan Perusahaan</label>
+                                                 <input type="file" name="ssemail" value="tes" class="form-control">
+                                             </div> --}}
                                               <div class="form-grup">
                                                   <label>Pembimbing</label>
                                                   <input type="text" name="pembimbing" value="{{$ListKunjin->pembimbing}}" class="form-control" placeholder="Masukan Guru Pembimbing">
@@ -77,4 +82,14 @@
               </div>
           </div>
       </div>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+$(document).ready(function(){
+        // var url = $('ssemail').attr('src');
+        // console.log(url);
+        $('#ssemail').val('tes.png');
+});
+</script>
+
 @endsection

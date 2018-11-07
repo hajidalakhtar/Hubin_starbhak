@@ -30,7 +30,9 @@ class CreateListKunjinsTable extends Migration
             $table->string('anggota_12')->nullable();
             $table->string('anggota_13')->nullable();
             $table->string('perusahaan');
-            $table->string('alamat_perusahaan');
+            $table->string('kelas');
+
+            // $table->string('alamat_perusahaan');
             $table->date('tanggal_keberangkatan');
             $table->string('ssemail');
             $table->string('pembimbing');

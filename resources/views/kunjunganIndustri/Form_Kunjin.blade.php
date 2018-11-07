@@ -20,49 +20,83 @@
                                               @csrf
                                               <div class="form-grup">
                                                   <label>Ketua Kelompok</label>
-                                                  <input type="text" name="KetuaKelompok" value="" class="form-control">
+                                                  <input type="text" name="KetuaKelompok" value="{{Auth::user()->name}}" class="form-control{{$errors->has('KetuaKelompok')? ' has-error' : ''}}">
+                                                    @if ($errors->has('KetuaKelompok'))
+                                                        <span class="help-block">
+                                                          <p class="text-danger">{{$errors->first('KetuaKelompok')}}</p>
+                                                        </span>
+                                                    @endif
+                                                    <br>
+
                                                   <label>Angota</label>
-                                                  @foreach ($user as $data )
-                                                    <input type="hidden" name="id_user" value="{{$data['id']}}">
+
+
+
+                                                    <input type="hidden" name="id_user" value="{{Auth::user()->id}}">
+
+
+                                                    @foreach (range(1,13) as $x)
+
+                                                      <input type="text" name="anggota_{{$x}}" id="anggota_{{ $x }}" value="" class="form-control" placeholder="Nama Anggota {{$x}}">
+
+                                                      @if ($errors->has('anggota_'.$x))
+                                                        <span>
+                                                          <p class="text-danger">{{$errors->first('anggota_'.$x)}}</p>
+                                                        </span>
+                                                      @endif
+
+                                                    @endforeach
+
+
+                                              </div>
+
+                                              <div class="form-grup">
+                                                  <label>Nama Perusahaan </label>
+                                                  {{-- <input type="text" name="perusahaan" value="" class="form-control" placeholder="Nama Perusahaan"> --}}
+                                                  <select name="perusahaan" class="form-control" >
+                                                    <option value="">Pilih Perusahaan</option>
+                                                    @foreach ($perusahaan as $data )
+                                                    <option  value="{{$data->id}}">{{$data->name}}</option>
                                                   @endforeach
-
-                                                  <input type="text" name="anggota_1" value="" class="form-control" placeholder="Nama Anggota 1">
-                                                  <input type="text" name="anggota_2" value="" class="form-control" placeholder="Nama Anggota 2">
-                                                  <input type="text" name="anggota_3" value="" class="form-control" placeholder="Nama Anggota 3">
-                                                  <input type="text" name="anggota_4" value="" class="form-control" placeholder="Nama Anggota 4">
-                                                  <input type="text" name="anggota_5" value="" class="form-control" placeholder="Nama Anggota 5">
-                                                  <input type="text" name="anggota_6" value="" class="form-control" placeholder="Nama Anggota 6">
-                                                  <input type="text" name="anggota_7" value="" class="form-control" placeholder="Nama Anggota 7">
-                                                  <input type="text" name="anggota_8" value="" class="form-control" placeholder="Nama Anggota 8">
-                                                  <input type="text" name="anggota_9" value="" class="form-control" placeholder="Nama Anggota 9">
-                                                  <input type="text" name="anggota_10" value="" class="form-control" placeholder="Nama Anggota 10">
-                                                  <input type="text" name="anggota_11" value="" class="form-control" placeholder="Nama Anggota 11">
-                                                  <input type="text" name="anggota_12" value="" class="form-control" placeholder="Nama Anggota 12">
-                                                  <input type="text" name="anggota_13" value="" class="form-control" placeholder="Nama Anggota 13">
-
+                                                  </select>
+                                                  @if ($errors->has('perusahaan'))
+                                                      <span class="help-block">
+                                                        <p class="text-danger">{{$errors->first('perusahaan')}}</p>
+                                                      </span>
+                                                  @endif
                                               </div>
 
-                                              <div class="form-grup">
-                                                  <label>Nama Perusahaan</label>
-                                                  <input type="text" name="perusahaan" value="" class="form-control" placeholder="Nama Perusahaan">
-                                              </div>
-                                              <div class="form-grup">
-                                                  <label>Alamat Perusahaan</label>
-                                                  <input type="text" name="alamat_perusahaan" value="" class="form-control" placeholder="Alamat Perusahaan ">
-                                              </div>
+
+                                              {{-- </div> --}}
                                               <div class="form-grup">
                                                   <label>Tanggal Keberangkatan</label>
                                                   <input type="date" name="tanggal_keberangkatan" value="" class="form-control">
+
                                               </div>
 
+                                              @if ($errors->has('tanggal_keberangkatan'))
+                                                  <span class="help-block">
+                                                    <p class="text-danger">{{$errors->first('tanggal_keberangkatan')}}</p>
+                                                  </span>
+                                              @endif
                                               <div class="form-grup">
                                                   <label>Screenshot Email Persetujuan Perusahaan</label>
                                                   <input type="file" name="ssemail" class="form-control">
                                               </div>
+                                              @if ($errors->has('ssemail'))
+                                                  <span class="help-block">
+                                                    <p class="text-danger">{{$errors->first('ssemail')}}</p>
+                                                  </span>
+                                              @endif
                                               <div class="form-grup">
                                                   <label>Pembimbing</label>
                                                   <input type="text" name="pembimbing" value="" class="form-control" placeholder="Masukan Guru Pembimbing">
                                               </div>
+                                              @if ($errors->has('pembimbing'))
+                                                  <span class="help-block">
+                                                    <p class="text-danger">{{$errors->first('pembimbing')}}</p>
+                                                  </span>
+                                              @endif
 
 
                                               <br>

@@ -17,21 +17,28 @@ Route::get('/', function () {
 });
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
+Route::get('/pdf/{id}' ,'PDFController@pdf')->name('downloadPDF');
 
 
 
 // Admin
-Route::get('/admin/login' ,'AdminLoginController@ShowAdminLogin');
+Route::get('/admin' ,'AdminLoginController@ShowAdminLogin')->name('admin.form.login');
 Route::get('/admin/list-kunjin' ,'Kunjungan_Industri@read')->middleware('auth:admin')->name('ListKunjin');
-
 Route::get('/admin/home' ,'AdminLoginController@adminhome')->middleware('auth:admin')->name('admin.home');
 Route::post('/admin/login/submit', 'AdminLoginController@adminlogin')->name('admin.login');
 Route::get('/admin/logout', 'AdminLoginController@logout')->name('admin.logout');
 
+// perusahaan
+Route::get('/perusahaan', 'PerusahaanLoginController@ShowPerusahaanLogin')->name('perusahaan.form.login');
+Route::get('/perusahaan/home/{id}', 'PerusahaanController@perusahaanhome')->name('perusahaan.home')->middleware('auth:perusahaan');
+Route::post('/perusahaan/login/submit', 'PerusahaanLoginController@Perusahaanlogin')->name('perusahaan.login');
+
+
 // Kunjungan_Industri
+Route::post('/kunjin/update','Kunjungan_Industri@update')->name('Kunjin.Update')->middleware('auth:admin');
 Route::get('/kunjin/detaildata/{id}','Kunjungan_Industri@DetailData')->name('Kunjin.DetailData')->middleware('auth:admin');
 Route::get('/kunjin/edit/{id}','Kunjungan_Industri@edit')->name('Kunjin.edit')->middleware('auth:admin');
 Route::get('/kunjin/delete/{id}','Kunjungan_Industri@Delete')->name('Kunjin.Delete')->middleware('auth:admin');
-Route::get('/kunjin/AddStatusUser/{id}','Kunjungan_Industri@AddStatusUser')->name('Kunjin.AddStatusUser');
+Route::get('/kunjin/AddStatusUser/{id}/{perusahaan}','Kunjungan_Industri@AddStatusUser')->name('Kunjin.AddStatusUser');
 Route::get('/form_kunjin','Kunjungan_Industri@ShowFormKunjin')->name('form_kunjin');
 Route::post('/prosesaddkunjin','Kunjungan_Industri@prosesadd')->name('Kunjin.ProsesAdd');

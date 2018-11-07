@@ -24,9 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-      // $user = User::find(Auth::user()->id);
-      // dd($user);
-        return view('home');
+      $user = User::find(Auth::user()->id);
+        return view('home',['user' => $user]);
     }
 
 

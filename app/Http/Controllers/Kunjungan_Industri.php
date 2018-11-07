@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\ListKunjin;
 use App\User;
+use App\Perusahaan;
 use Illuminate\Http\Request;
 
 class Kunjungan_Industri extends Controller
@@ -10,8 +11,9 @@ class Kunjungan_Industri extends Controller
   public function ShowFormKunjin()
   {
       // return view('admin.AdminLogin');
-      $User = User::all();
-      return view('kunjunganIndustri.Form_Kunjin',['user' => $User]);
+      // $User = User;
+      $perusahaan = Perusahaan::all();
+      return view('kunjunganIndustri.Form_Kunjin',['perusahaan' => $perusahaan]);
 
   }
   public function getdata()
@@ -21,7 +23,7 @@ class Kunjungan_Industri extends Controller
 }
 public function read()
 {
-  $listkunjin = ListKunjin::all();
+  $listkunjin = ListKunjin::paginate(6);
   return view('admin.ListKunjin',['ListKunjin' => $listkunjin]);
 }
 public function add()
@@ -31,6 +33,35 @@ return view('addkunjin');
 }
 public function prosesadd(Request $request)
 {
+  // dd($request->KetuaKelompok);
+  $this->validate($request,[
+    'KetuaKelompok' => 'required',
+    'anggota_1' => 'required',
+    'anggota_2' => 'required',
+    'anggota_3' => 'required',
+    'anggota_4' => 'required',
+    'anggota_5' => 'required',
+    'anggota_6' => 'required',
+    'anggota_7' => 'required',
+    'anggota_8' => 'required',
+    'anggota_9' => 'required',
+    'anggota_10' => 'required',
+    'anggota_11' => 'required',
+    'anggota_12' => 'required',
+    'anggota_13' => 'required',
+    'perusahaan' => 'required',
+    'tanggal_keberangkatan' => 'required',
+    'ssemail' => 'required',
+    'pembimbing' => 'required',
+
+
+
+
+
+  ],[
+    'KetuaKelompok.required' => 'Anda belom memasukan nama Ketua Kelompok'
+  ]);
+    // dd($request->anggota);
 $listkunjin = new ListKunjin;
 $listkunjin->nama_ketua = $request->KetuaKelompok;
 $listkunjin->anggota_1 = $request->anggota_1;
@@ -47,20 +78,24 @@ $listkunjin->anggota_11 = $request->anggota_11;
 $listkunjin->anggota_12 = $request->anggota_12;
 $listkunjin->anggota_13 = $request->anggota_13;
 $listkunjin->perusahaan = $request->perusahaan;
-$listkunjin->alamat_perusahaan = $request->alamat_perusahaan;
+// $listkunjin->alamat_perusahaan = $request->alamat_perusahaan;
 $listkunjin->tanggal_keberangkatan = $request->tanggal_keberangkatan;
-// $image = $request->image->store('public/place');
-// $listkunjin->image_path = basename($image);
-$listkunjin->ssemail = "tes.png";
+$image = $request->ssemail->store('public/place');
+$listkunjin->ssemail = basename($image);
+$listkunjin->kelas = "kelas 10";
 $listkunjin->pembimbing = $request->pembimbing;
 $listkunjin->save();
-return redirect()->route('Kunjin.AddStatusUser',$request->id_user);
+return redirect('/kunjin/AddStatusUser/'.$request->id_user.'/'.$request->perusahaan);
 }
-public function AddStatusUser($id)
+public function AddStatusUser($id,$perusahaan)
 {
   $user = User::find($id);
-  // dd($user);
-  $user->status = "Sudah Mengisi Form";
+
+  // $listkunjin = ListKunjin::find($id)
+
+  $user->status = "Siap Berangkat";
+  $user->id_perusahaan = $perusahaan;
+
   $user->save();
   return redirect('/home');
 }
@@ -76,20 +111,34 @@ public function delete($id)
 public function edit($id)
 {
 $listkunjin = ListKunjin::find($id);
+$perusahaan = Perusahaan::all();
 // dd($listkunjin);
-return view('kunjunganIndustri.Form_Edit_Kunjin',['ListKunjin' => $listkunjin]);
+return view('kunjunganIndustri.Form_Edit_Kunjin',['ListKunjin' => $listkunjin],['perusahaan' => $perusahaan ]);
 }
 public function update(Request $request)
 {
-  $listkunjin = place::find($request->id);
-  $listkunjin->name = $request->name;
-  $listkunjin->latitude = $request->latitude;
-  $listkunjin->longitude = $request->longitude;
-  $listkunjin->x = $request->x;
-  $listkunjin->y = $request->y;
-  $listkunjin->description = $request->description;
+  $listkunjin = ListKunjin::find($request->id);
+  $listkunjin->nama_ketua = $request->KetuaKelompok;
+  $listkunjin->anggota_1 = $request->anggota_1;
+  $listkunjin->anggota_2 = $request->anggota_2;
+  $listkunjin->anggota_3 = $request->anggota_3;
+  $listkunjin->anggota_4 = $request->anggota_4;
+  $listkunjin->anggota_5 = $request->anggota_5;
+  $listkunjin->anggota_6 = $request->anggota_6;
+  $listkunjin->anggota_7 = $request->anggota_7;
+  $listkunjin->anggota_8 = $request->anggota_8;
+  $listkunjin->anggota_9 = $request->anggota_9;
+  $listkunjin->anggota_10 = $request->anggota_10;
+  $listkunjin->anggota_11 = $request->anggota_11;
+  $listkunjin->anggota_12 = $request->anggota_12;
+  $listkunjin->anggota_13 = $request->anggota_13;
+  $listkunjin->perusahaan = $request->perusahaan;
+  $listkunjin->tanggal_keberangkatan = $request->tanggal_keberangkatan;
+  // $image = $request->ssemail->store('public/place');
+  // $listkunjin->ssemail = basename($image);
+  $listkunjin->pembimbing = $request->pembimbing;
   $listkunjin->save();
-  return redirect('/place');
+  return redirect('/admin/list-kunjin');
 }
 // public function DetailData($id)
 // {

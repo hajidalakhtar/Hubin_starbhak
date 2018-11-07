@@ -15,7 +15,7 @@
                     @endif
 
                     <a href="{{route('ListKunjin')}}" class="btn btn-primary">List Kunjin</a>
-
+                    <a href="{{ route('register') }}" class="btn btn-primary">Daftarkan Siswa</a>
                 </div>
             </div>
         </div>

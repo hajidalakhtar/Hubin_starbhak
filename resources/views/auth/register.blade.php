@@ -61,7 +61,24 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                              <div class="form-group row">
+                              <label for="Kelas" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
+
+                              <div class="col-md-6">
+                                <select id="Kelas"  class="form-control{{ $errors->has('Kelas') ? ' is-invalid' : '' }}" name="Kelas" required>
+                                  <option value="kelas 10">Kelas 10</option>
+                                  <option value="kelas 11">Kelas 11</option>
+                                  <option value="kelas 12">Kelas 12</option>
+                                </select>
+
+                                  @if ($errors->has('Kelas'))
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $errors->first('Kelas') }}</strong>
+                                  </span>
+                                  @endif
+                              </div>
+                          </div>
+                            <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
