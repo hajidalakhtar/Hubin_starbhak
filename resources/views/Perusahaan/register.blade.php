@@ -8,11 +8,11 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('perusahaan.add') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Nama</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Nama Perusahaan</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
@@ -61,24 +61,15 @@
                             </div>
                         </div>
 
+                              <div class="form-group row">
+                              <label for="Kelas" class="col-md-4 col-form-label text-md-right">Alamat Perusahaan</label>
 
-                                        <div class="form-group row">
-                                        <label for="Kelas" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
+                              <div class="col-md-6">
+                                  <input type="text" name="alamat_perusahaan" value="" class="form-control">
 
-                                        <div class="col-md-6">
-                                          <select id="Kelas"  class="form-control{{ $errors->has('Kelas') ? ' is-invalid' : '' }}" name="Kelas" required>
-                                            <option value="kelas 10">Kelas 10</option>
-                                            <option value="kelas 11">Kelas 11</option>
-                                            <option value="kelas 12">Kelas 12</option>
-                                          </select>
 
-                                            @if ($errors->has('Kelas'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('Kelas') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
+                              </div>
+                          </div>
                             <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

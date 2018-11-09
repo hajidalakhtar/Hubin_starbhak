@@ -57,7 +57,7 @@
                                                     <option value="">Pilih Perusahaan</option>
                                                     @foreach ($perusahaan as $data )
                                                     <option  value="{{$data->id}}">{{$data->name}}</option>
-                                                  @endforeach
+                                                    @endforeach
                                                   </select>
                                                   @if ($errors->has('perusahaan'))
                                                       <span class="help-block">

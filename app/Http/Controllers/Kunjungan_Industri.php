@@ -21,10 +21,15 @@ class Kunjungan_Industri extends Controller
   $listkunjin = ListKunjin::all();
   return $listkunjin;
 }
-public function read()
+public function readBelomDiTerima()
 {
-  $listkunjin = ListKunjin::paginate(6);
-  return view('admin.ListKunjin',['ListKunjin' => $listkunjin]);
+  $listkunjin = ListKunjin::where('Status', 'Menungu konformasi')->paginate(6);
+  return view('admin.ListKunjin_Belom_Diterima',['ListKunjin' => $listkunjin]);
+}
+public function readSudahDiTerima()
+{
+  $listkunjin = ListKunjin::where('Status', 'Sudah Di Izinkan')->paginate(6);
+  return view('admin.ListKunjin_Sudah_Diterima',['ListKunjin' => $listkunjin]);
 }
 public function add()
 {
@@ -90,14 +95,18 @@ return redirect('/kunjin/AddStatusUser/'.$request->id_user.'/'.$request->perusah
 public function AddStatusUser($id,$perusahaan)
 {
   $user = User::find($id);
-
-  // $listkunjin = ListKunjin::find($id)
-
   $user->status = "Siap Berangkat";
   $user->id_perusahaan = $perusahaan;
-
   $user->save();
   return redirect('/home');
+}
+public function AddStatusKunjin($id)
+{
+  $listkunjin = ListKunjin::find($id);
+  $listkunjin->status = "Sudah Di Izinkan";
+  $listkunjin->save();
+  return redirect('admin/list-kunjin');
+
 }
 public function delete($id)
 {

@@ -23,7 +23,8 @@ Route::get('/pdf/{id}' ,'PDFController@pdf')->name('downloadPDF');
 
 // Admin
 Route::get('/admin' ,'AdminLoginController@ShowAdminLogin')->name('admin.form.login');
-Route::get('/admin/list-kunjin' ,'Kunjungan_Industri@read')->middleware('auth:admin')->name('ListKunjin');
+Route::get('/admin/list-kunjin' ,'Kunjungan_Industri@readBelomDiTerima')->middleware('auth:admin')->name('ListKunjin');
+Route::get('/admin/list-kunjin/sudah-di-izinkan' ,'Kunjungan_Industri@readSudahDiTerima')->middleware('auth:admin')->name('ListKunjin.SudahDiTerima');
 Route::get('/admin/home' ,'AdminLoginController@adminhome')->middleware('auth:admin')->name('admin.home');
 Route::post('/admin/login/submit', 'AdminLoginController@adminlogin')->name('admin.login');
 Route::get('/admin/logout', 'AdminLoginController@logout')->name('admin.logout');
@@ -32,9 +33,13 @@ Route::get('/admin/logout', 'AdminLoginController@logout')->name('admin.logout')
 Route::get('/perusahaan', 'PerusahaanLoginController@ShowPerusahaanLogin')->name('perusahaan.form.login');
 Route::get('/perusahaan/home/{id}', 'PerusahaanController@perusahaanhome')->name('perusahaan.home')->middleware('auth:perusahaan');
 Route::post('/perusahaan/login/submit', 'PerusahaanLoginController@Perusahaanlogin')->name('perusahaan.login');
+Route::get('/perusahaan/register', 'PerusahaanLoginController@showPerusahaanRegister')->name('perusahaan.show.add');
+Route::post('/perusahaan/register/add', 'PerusahaanLoginController@create')->name('perusahaan.add');
 
 
 // Kunjungan_Industri
+
+Route::get('/kunjin/AddStatusKunjin/{id}','Kunjungan_Industri@AddStatusKunjin')->name('Kunjin.AddStatusKunjin');
 Route::post('/kunjin/update','Kunjungan_Industri@update')->name('Kunjin.Update')->middleware('auth:admin');
 Route::get('/kunjin/detaildata/{id}','Kunjungan_Industri@DetailData')->name('Kunjin.DetailData')->middleware('auth:admin');
 Route::get('/kunjin/edit/{id}','Kunjungan_Industri@edit')->name('Kunjin.edit')->middleware('auth:admin');

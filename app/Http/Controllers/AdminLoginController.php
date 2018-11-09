@@ -20,7 +20,7 @@ class AdminLoginController extends Controller
         if (Auth::guard('admin')->attempt($login)) {
           return redirect('admin/home');
         }
-        return redirect('admin/login');
+        return redirect('admin');
 
 
       }

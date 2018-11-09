@@ -15,10 +15,11 @@ class CreatePerusahaanTable extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
           $table->increments('id');
-          $table->string('name_perusahaan');
+          $table->string('name');
           $table->string('email',120)->unique();
           $table->string('password');
           $table->string('alamat_perusahaan');
+          $table->integer('id_kelompok')->nullable();
           $table->rememberToken();
           $table->timestamps();
         });

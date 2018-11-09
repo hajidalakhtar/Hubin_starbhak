@@ -31,11 +31,11 @@ class CreateListKunjinsTable extends Migration
             $table->string('anggota_13')->nullable();
             $table->string('perusahaan');
             $table->string('kelas');
-
-            // $table->string('alamat_perusahaan');
             $table->date('tanggal_keberangkatan');
             $table->string('ssemail');
             $table->string('pembimbing');
+            $table->string('status')->default("Menungu konformasi");
+
 
             $table->timestamps();
         });

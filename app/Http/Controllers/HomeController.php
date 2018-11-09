@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\ListKunjin;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+      // $nama = Auth::user()->name;
+      // $listkunjin = ListKunjin::where('nama_ketua',$nama)->first();
+      // dd($listkunjin);
       $user = User::find(Auth::user()->id);
         return view('home',['user' => $user]);
     }

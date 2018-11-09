@@ -16,6 +16,8 @@
 
                     <a href="{{route('ListKunjin')}}" class="btn btn-primary">List Kunjin</a>
                     <a href="{{ route('register') }}" class="btn btn-primary">Daftarkan Siswa</a>
+                    <a href="{{route('perusahaan.show.add')}}" class="btn btn-primary">Daftarkan Perusahaan</a>
+
                 </div>
             </div>
         </div>

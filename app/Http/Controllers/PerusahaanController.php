@@ -33,4 +33,6 @@ class PerusahaanController extends Controller
     // dd($listkunjin);
     return view('Perusahaan.home',['ListKunjin' => $listkunjin]);
   }
+
+
 }

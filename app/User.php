@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
       return Perusahaan::where('id',$this->id_perusahaan)->first()->name;
     }
+
+        public function Status()
+        {
+          return ListKunjin::where('nama_ketua',$this->name)->first()->status;
+        }
 }
